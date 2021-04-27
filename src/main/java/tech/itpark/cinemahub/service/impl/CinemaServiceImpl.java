@@ -1,4 +1,6 @@
 package tech.itpark.cinemahub.service.impl;
 
-public class CinemaServiceImpl {
+import tech.itpark.cinemahub.service.api.CinemaService;
+
+public class CinemaServiceImpl implements CinemaService {
 }
