@@ -1,0 +1,45 @@
+GET http://localhost:8080/media/get
+
+###
+
+POST http://localhost:8080/media
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="../jakarta.png"
+Content-Type: image/png
+
+< ./jakarta.png
+--WebAppBoundary--
+
+###
+
+POST http://localhost:8080/media
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="../tmdb_5000_movies.csv"
+Content-Type: text/csv
+
+< ./tmdb_5000_movies.csv
+--WebAppBoundary--
+
+###
+
+POST http://localhost:8080/media/parse
+Content-Type: application/json
+
+{
+"path": "C:\\Users\\amaximov\\IdeaProjects\\ultimate\\Cinemahub\\src\\test\\resource\\tmdb_5000_movies.csv"
+}
+
+###
+
+GET http://localhost:8080/media/getTop
+
+###
+
+
+GET http://localhost:8080/media/getById/58
+
+###

@@ -21,8 +21,8 @@
             <param-value>/WEB-INF/main-context.xml</param-value>
         </init-param>
         <multipart-config>
-            <max-file-size>10485760</max-file-size>
-            <max-request-size>20971520</max-request-size>
+            <max-file-size>100485760</max-file-size>
+            <max-request-size>200971520</max-request-size>
         </multipart-config>
     </servlet>
     <servlet-mapping>

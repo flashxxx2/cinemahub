@@ -1,12 +1,22 @@
-CREATE TABLE cinema (
-    id BIGSERIAL PRIMARY KEY,
-    content TEXT,
-    attachment TEXT,
-    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE films (
+     id BIGSERIAL PRIMARY KEY,
+     budget TEXT,
+     genres TEXT,
+     homepage TEXT,
+     keywords TEXT,
+     original_language TEXT,
+     original_title TEXT,
+     overview TEXT,
+     popularity TEXT,
+     production_companies TEXT,
+     production_countries TEXT,
+     release_date TEXT,
+     revenue TEXT,
+     runtime TEXT,
+     spoken_languages TEXT,
+     status TEXT,
+     tagline TEXT,
+     title TEXT,
+     vote_average TEXT,
+     vote_column TEXT
 );
-
-CREATE TABLE users(
-    id BIGSERIAL PRIMARY KEY,
-    name TEXT
-
-)

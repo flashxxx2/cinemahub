@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5000/db
+    username: app
+    password: pass
+    initialization-mode: always
+    platform: postgres
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      show-sql: true
+      ddl-auto: none
