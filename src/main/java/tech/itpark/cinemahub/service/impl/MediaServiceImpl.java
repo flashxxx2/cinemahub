@@ -10,7 +10,7 @@ import tech.itpark.cinemahub.exception.MediaUploadException;
 import tech.itpark.cinemahub.exception.UnsupportedMediaTypeException;
 import tech.itpark.cinemahub.model.dto.MediaUploadDto;
 import tech.itpark.cinemahub.model.entity.CinemaEntity;
-import tech.itpark.cinemahub.repository.CinemaRepository;
+import tech.itpark.cinemahub.repository.MediaRepository;
 import tech.itpark.cinemahub.service.api.MediaService;
 
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class MediaServiceImpl implements MediaService {
             MediaType.IMAGE_PNG_VALUE, ".png"
     );
     private final Tika tika = new Tika();
-    private final CinemaRepository repository;
+    private final MediaRepository repository;
 
     @Override
     public MediaUploadDto upload(MultipartFile file) {
@@ -94,15 +94,4 @@ public class MediaServiceImpl implements MediaService {
         }
         repository.save(cinemas);
     }
-
-    @Override
-    public List<CinemaEntity> getTop() {
-        return repository.getTop();
-    }
-
-    @Override
-    public Optional<CinemaEntity> getById(int id) {
-        return repository.getById(id);
-    }
-
 }

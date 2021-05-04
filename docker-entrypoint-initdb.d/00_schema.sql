@@ -18,5 +18,5 @@ CREATE TABLE films (
      tagline TEXT,
      title TEXT,
      vote_average TEXT,
-     vote_column TEXT
+     vote_count TEXT
 );

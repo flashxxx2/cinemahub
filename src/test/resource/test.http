@@ -1,6 +1,3 @@
-GET http://localhost:8080/media/get
-
-###
 
 POST http://localhost:8080/media
 Content-Type: multipart/form-data; boundary=WebAppBoundary
@@ -35,11 +32,25 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/media/getTop
+GET http://localhost:8080/getTop
 
 ###
 
 
-GET http://localhost:8080/media/getById/58
+GET http://localhost:8080/getById/58
 
 ###
+
+GET http://localhost:8080/getAll?page=2&limit=3
+
+###
+GET http://localhost:8080/getGenres
+
+###
+GET http://localhost:8080/getCompanies
+
+###
+GET http://localhost:8080/getTopFilmsByGenre?genre=Horror
+
+###
+GET http://localhost:8080/getFilmsByCompany/2
