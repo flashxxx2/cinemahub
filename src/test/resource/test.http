@@ -27,7 +27,7 @@ POST http://localhost:8080/media/parse
 Content-Type: application/json
 
 {
-"path": "C:\\Users\\amaximov\\IdeaProjects\\ultimate\\Cinemahub\\src\\test\\resource\\tmdb_5000_movies.csv"
+"path": "C:\\Users\\rit20\\IdeaProjects\\cinemahub\\src\\test\\resource\\tmdb_5000_movies.csv"
 }
 
 ###
