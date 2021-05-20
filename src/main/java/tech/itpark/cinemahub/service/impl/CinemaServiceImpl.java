@@ -32,12 +32,9 @@ public class CinemaServiceImpl implements CinemaService {
         String[] split = content.split(",(?=[^\\}]*(?:\\{|$))");
         for (int i = 0; i < split.length; i++) {
 
-            String replace = split[i].replace("\"[", "");
-            String replace2 = replace.replace("]\"", "");
-            String replace3 = replace2.replace("]", "");
-            String replace4 = replace3.replace("[", "").trim();
-            if (!replace4.isEmpty()) {
-                JsonObject jsonObject = gson.fromJson(replace4, JsonObject.class);
+            String replace = getString(split[i]);
+            if (!replace.isEmpty()) {
+                JsonObject jsonObject = gson.fromJson(replace, JsonObject.class);
                 JsonElement name = jsonObject.get("name");
                 set.add(name.getAsString());
             }
@@ -54,12 +51,9 @@ public class CinemaServiceImpl implements CinemaService {
         String[] split = content.split(",(?=[^\\}]*(?:\\{|$))");
         for (int i = 0; i < split.length; i++) {
 
-            String replace = split[i].replace("\"[", "");
-            String replace2 = replace.replace("]\"", "");
-            String replace3 = replace2.replace("]", "");
-            String replace4 = replace3.replace("[", "").trim();
-            if (!replace4.isEmpty()) {
-                JsonObject jsonObject = gson.fromJson(replace4, JsonObject.class);
+            String replace = getString(split[i]);
+            if (!replace.isEmpty()) {
+                JsonObject jsonObject = gson.fromJson(replace, JsonObject.class);
                 JsonElement name = jsonObject.get("name");
                 set.add(name.getAsString());
             }
@@ -73,30 +67,27 @@ public class CinemaServiceImpl implements CinemaService {
         List<String> titles = new ArrayList<>();
         final var list = repository.getTopFilmsByGenre();
         for (String s : list) {
-                String genres = s.replace("\"\"", "\"");
-                String[] strings = genres.split("(?=[^\")]),(?=\"|\\])");
+            String genres = s.replace("\"\"", "\"");
+            String[] strings = genres.split("(?=[^\")]),(?=\"|\\])");
 
-                //Если массив меньше 1, значит у фильма не указан жанр
-                if (strings.length > 1) {
-                    String[] split = strings[1].split(",(?=[^\\}]*(?:\\{|$))");
+            //Если массив меньше 1, значит у фильма не указан жанр
+            if (strings.length > 1) {
+                String[] split = strings[1].split(",(?=[^\\}]*(?:\\{|$))");
 
-                    for (String value : split) {
-                        String replace = value.replace("\"[", "");
-                        String replace2 = replace.replace("]\"", "");
-                        String replace3 = replace2.replace("]", "");
-                        String replace4 = replace3.replace("[", "").trim();
-                        if (!replace4.isEmpty()) {
-                            JsonObject jsonObject = gson.fromJson(replace4, JsonObject.class);
-                            JsonElement name = jsonObject.get("name");
-                            if (name.getAsString().equals(genre)) {
-                                titles.add(strings[0]);
-                            }
+                for (String value : split) {
+                    String replace = getString(value);
+                    if (!replace.isEmpty()) {
+                        JsonObject jsonObject = gson.fromJson(replace, JsonObject.class);
+                        JsonElement name = jsonObject.get("name");
+                        if (name.getAsString().equals(genre)) {
+                            titles.add(strings[0]);
                         }
                     }
                 }
-                if (titles.size() > MAX_CAPACITY_SIZE - 1) {
-                    break;
-                }
+            }
+            if (titles.size() > MAX_CAPACITY_SIZE - 1) {
+                break;
+            }
         }
         return titles;
     }
@@ -107,29 +98,34 @@ public class CinemaServiceImpl implements CinemaService {
         List<String> titles = new ArrayList<>();
         final var list = repository.getFilmsByCompany();
         for (String s : list) {
-                String genres = s.replace("\"\"", "\"");
-                String[] strings = genres.split("(?=[^\")]),(?=\"|\\])");
+            String genres = s.replace("\"\"", "\"");
+            String[] strings = genres.split("(?=[^\")]),(?=\"|\\])");
 
-                //Если массив меньше 1, значит у фильма не указана компания
-                if (strings.length > 1) {
-                    String[] split = strings[1].split(",(?=[^\\}]*(?:\\{|$))");
+            //Если массив меньше 1, значит у фильма не указана компания
+            if (strings.length > 1) {
+                String[] split = strings[1].split(",(?=[^\\}]*(?:\\{|$))");
 
-                    for (String value : split) {
-                        String replace = value.replace("\"[", "");
-                        String replace2 = replace.replace("]\"", "");
-                        String replace3 = replace2.replace("]", "");
-                        String replace4 = replace3.replace("[", "").trim();
-                        if (!replace4.isEmpty()) {
-                            JsonObject jsonObject = gson.fromJson(replace4, JsonObject.class);
-                            JsonElement id = jsonObject.get("id");
-                            if (id.getAsInt() == filmId) {
-                                titles.add(strings[0]);
-                            }
+                for (String value : split) {
+                    String replace = getString(value);
+                    if (!replace.isEmpty()) {
+                        JsonObject jsonObject = gson.fromJson(replace, JsonObject.class);
+                        JsonElement id = jsonObject.get("id");
+                        if (id.getAsInt() == filmId) {
+                            titles.add(strings[0]);
                         }
                     }
                 }
+            }
         }
         return titles;
+    }
+
+    private String getString(String value) {
+        return value.replace("\"[", "")
+                .replace("]\"", "")
+                .replace("]\"", "")
+                .replace("]", "")
+                .replace("[", "").trim();
     }
 
     private final Mapper mapper;
